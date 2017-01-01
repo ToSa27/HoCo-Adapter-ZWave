@@ -42,3 +42,6 @@ config.sh
 # hoco app config (created by setup.sh)
 config.json
 
+# OpenZWave log file
+OZW_Log.txt
+
