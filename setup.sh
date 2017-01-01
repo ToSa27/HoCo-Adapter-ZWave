@@ -1,6 +1,6 @@
 #!/bin/bash
 cd "${0%/*}"
-. ${HOCO_HOME}/config.sh
+. ${HOCO_HOME}/data/config.sh
 . config.sh
 sudo apt-get install -y libudev-dev
 wget http://old.openzwave.com/downloads/openzwave-${HOCO_ZWAVE_OZW_VERSION}.tar.gz
