@@ -110,16 +110,16 @@ Bus.prototype.connected = function() {
 	return _connected;
 };
 
-Bus.prototype.adapterSend = function(command, value, data) {
-	send("@" + command, value, date);
+Bus.prototype.adapterSend = function(command, value, data, qos = 0, retain = true) {
+	send("@" + command, value, data, qos, retain);
 };
 	
-Bus.prototype.nodeSend = function(nodeid, command, value, data) {
-	send(nodeid + "/@" + command, value, date);
+Bus.prototype.nodeSend = function(nodeid, command, value, data, qos = 0, retain = true) {
+	send(nodeid + "/@" + command, value, data, qos, retain);
 };
 	
-Bus.prototype.parameterSend = function(nodeid, parameterid, command, value, data) {
-	send(nodeid + "/" + parameterid + "/@" + command, value, date);
+Bus.prototype.parameterSend = function(nodeid, parameterid, command, value, data, qos = 0, retain = true) {
+	send(nodeid + "/" + parameterid + "/@" + command, value, data, qos, retain);
 };
 
 module.exports = Bus;

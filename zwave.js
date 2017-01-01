@@ -44,4 +44,8 @@ function Zwave(config) {
 
 util.inherits(Zwave, EventEmitter)
 
+Zwave.prototype.connected = function() {
+        return _connected;
+};
+
 module.exports = Zwave;
