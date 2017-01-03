@@ -68,7 +68,7 @@ function Bus(config, adaptertype, adapterid) {
 // outgoingEmpty
 
 	_mqtt.on('message', function (topic, message) {
-		log.info("bus rx: " + topic + " = " + message);
+//		log.info("bus rx: " + topic + " = " + message);
 // ToDo: handle system wide topics like $time etc.
 		if (!topic.startsWith(_prefix + "/"))
 			return;
@@ -113,11 +113,11 @@ Bus.prototype.connected = function() {
 Bus.prototype.adapterSend = function(command, value, data, qos = 0, retain = true) {
 	send("@" + command, value, data, qos, retain);
 };
-	
+
 Bus.prototype.nodeSend = function(nodeid, command, value, data, qos = 0, retain = true) {
 	send(nodeid + "/@" + command, value, data, qos, retain);
 };
-	
+
 Bus.prototype.parameterSend = function(nodeid, parameterid, command, value, data, qos = 0, retain = true) {
 	send(nodeid + "/" + parameterid + "/@" + command, value, data, qos, retain);
 };
