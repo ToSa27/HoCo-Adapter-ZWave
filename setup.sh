@@ -20,9 +20,13 @@ echo '  "username": "'${HOCO_MQTT_USER}'",'>> config.json
 echo '  "password": "'${HOCO_MQTT_PASS}'",'>> config.json
 echo '  "prefix": "'${HOCO_MQTT_PREFIX}'"'>> config.json
 echo ' },'>> config.json
-echo ' "zwave": {'>> config.json
-echo '  "device": "'${HOCO_ZWAVE_DEVICE}'"'>> config.json
-echo ' }'>> config.json
+echo ' "adapter": ['>> config.json
+echo '  {'>> config.json
+echo '   "type": "zwave",'>> config.json
+echo '   "module": "zwave",'>> config.json
+echo '   "device": "'${HOCO_ZWAVE_DEVICE}'"'>> config.json
+echo '  }'>> config.json
+echo ' ]'>> config.json
 echo '}'>> config.json
-pm2 start ${PWD}/app.js --name "zwave" -- zwave
+pm2 start ${PWD}/app.js --name "zwave"
 pm2 save
