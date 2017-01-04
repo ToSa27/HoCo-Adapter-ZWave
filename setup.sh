@@ -24,5 +24,5 @@ echo ' "zwave": {'>> config.json
 echo '  "device": "'${HOCO_ZWAVE_DEVICE}'"'>> config.json
 echo ' }'>> config.json
 echo '}'>> config.json
-pm2 start ${PWD}/app.js --name "zwave"
+pm2 start ${PWD}/app.js --name "zwave" -- zwave
 pm2 save
