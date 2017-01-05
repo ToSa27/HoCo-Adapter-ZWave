@@ -1,0 +1,16 @@
+[Unit]
+Description=HoCo Adapter ZWave
+After=network.target
+
+[Service]
+WorkingDirectory=/opt/hoco/adapter/zwave
+ExecStart=/usr/bin/node app.js
+Restart=always
+StandardOutput=syslog
+SyslogIdentifier=hoco-zwave
+User=hoco
+Group=hoco
+Environment=PATH=/usr/bin:/usr/local/bin
+
+[Install]
+WantedBy=multi-user.target

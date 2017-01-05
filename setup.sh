@@ -1,7 +1,8 @@
 #!/bin/bash
 cd "${0%/*}"
 . ${HOCO_HOME}/data/config.sh
-. config.sh
+export HOCO_ZWAVE_OZW_VERSION=1.4.1
+export HOCO_ZWAVE_DEVICE=/dev/ttyACM0
 sudo apt-get install -y libudev-dev
 wget http://old.openzwave.com/downloads/openzwave-${HOCO_ZWAVE_OZW_VERSION}.tar.gz
 tar zxvf openzwave-*.gz
@@ -10,8 +11,16 @@ make
 sudo make install
 cd ..
 rm -rf openzwave-*
-export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/usr/local/lib
-sudo su -c "echo 'LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/usr/local/lib' >> /etc/environment"
+if [ -z "$LD_LIBRARY_PATH" ]; then
+  export LD_LIBRARY_PATH=/usr/local/lib
+  sudo su -c "echo 'LD_LIBRARY_PATH=/usr/local/lib' >> /etc/environment"
+else
+  echo $LD_LIBRARY_PATH | grep -q "/usr/local/lib"
+  if [ $? -eq 0 ]; then
+    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
+    sudo su -c "echo 'LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib' >> /etc/environment"
+  fi
+fi
 npm install
 echo '{' > config.json
 echo ' "mqtt": {'>> config.json
@@ -28,5 +37,5 @@ echo '   "device": "'${HOCO_ZWAVE_DEVICE}'"'>> config.json
 echo '  }'>> config.json
 echo ' ]'>> config.json
 echo '}'>> config.json
-pm2 start ${PWD}/app.js --name "zwave"
-pm2 save
+sudo cp hoco-zwave.service /etc/systemd/system/
+sudo systemctl enable hoco-zwave.service
