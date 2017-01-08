@@ -4,7 +4,7 @@ After=network.target
 
 [Service]
 WorkingDirectory=/opt/hoco/adapter/zwave
-ExecStart=/usr/bin/node app.js
+ExecStart=/usr/bin/node ../common/app.js
 Restart=always
 StandardOutput=syslog
 SyslogIdentifier=hoco-zwave

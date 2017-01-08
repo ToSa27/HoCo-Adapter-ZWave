@@ -28,18 +28,18 @@ function Zwave(config) {
                 log.info("zwave driver failed");
 		self.connected = false;
 		self.zwave.disconnect();
-		self.emit("disconnected");
+		self.emit("disconnected", self);
 	});
 
 	this.zwave.on('scan complete', function() {
                 log.info("zwave scan complete");
                 self.connected = true;
-                self.emit("connected", self.id);
+                self.emit("connected", self, self.id);
 	});
 
 	this.zwave.on('node ready', function(nodeid, nodeinfo){
 		log.info("zwave node ready: " + nodeid + ": " + JSON.stringify(nodeinfo));
-		self.emit("node", "status", "online", JSON.stringify(nodeinfo));
+//		self.emit("node", self, "status", "online", JSON.stringify(nodeinfo));
 	});
 
 	this.zwave.on('node event', function(nodeid, data) {
