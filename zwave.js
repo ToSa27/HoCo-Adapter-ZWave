@@ -1,6 +1,6 @@
 const EventEmitter = require('events');
 const util = require('util');
-const log = require("./log.js");
+const log = require("../common/log.js");
 const ZwaveLib = require('openzwave-shared');
 
 function Zwave(config) {
@@ -8,6 +8,7 @@ function Zwave(config) {
 	EventEmitter.call(this);
 	var self = this;
 	this.config = config;
+	this.connected = false;
 	this.zwave = new ZwaveLib({
 		ConsoleOutput: false,
 		Logging: false,
@@ -53,10 +54,6 @@ function Zwave(config) {
 };
 
 util.inherits(Zwave, EventEmitter)
-
-Zwave.prototype.connected = function() {
-        return this.connected;
-};
 
 Zwave.prototype.adapter = function(command, message) {
 	switch (command) {

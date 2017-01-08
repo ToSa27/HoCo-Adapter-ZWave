@@ -23,6 +23,7 @@ else
     sudo su -c "echo 'LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib' >> /etc/environment"
   fi
 fi
+cd ..
 npm install
 echo '{' > config.json
 echo ' "mqtt": {'>> config.json
@@ -39,5 +40,5 @@ echo '   "device": "'${HOCO_ZWAVE_DEVICE}'"'>> config.json
 echo '  }'>> config.json
 echo ' ]'>> config.json
 echo '}'>> config.json
-sudo cp hoco-zwave.service /etc/systemd/system/
+sudo cp setup/hoco-zwave.service /etc/systemd/system/
 sudo systemctl enable hoco-zwave.service
