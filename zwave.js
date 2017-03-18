@@ -88,7 +88,7 @@ util.inherits(Zwave, EventEmitter)
 
 Zwave.prototype.adapter = function(command, message) {
 	switch (command) {
-		case "learn":
+		case "scan":
 			this.zwave.addNode(this.id, true);
 			break;
 	}
